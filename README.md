@@ -66,7 +66,7 @@ __Note: Once complete you should see various IaC scans as shown below_
 
 ![alt tag](https://i.ibb.co/DKY911V/snyk-iac-3.png)
 
-For each Vulnerability, Snyk displays the following ordered by our Line no:
+For each Vulnerability, Snyk displays the following ordered by Line no:
 
 1. Each Vulnerability grouped by line no and severity 
 1. Each Vulnerability links to the Snyk policy it was defined against including the path to the issue, what the issue is, the impact and how to resolve it
@@ -81,6 +81,13 @@ Note: We will resolve some of these issues shortly for now just browse through s
 Snyk tests and monitors your Terraform files from your source code repositories, guiding you with advice for how you can better secure your cloud environment--catching misconfigurations before you push to production and helping you to fix them
 
 In addition to the Snyk App UI we also have, snyk - CLI and build-time tool to find & fix known vulnerabilities in open-source dependencies and IaC configuration files. 
+
+_Note: Please ensure you have the latest version of the Snyk CLI installed a version equal to or greater than the version below. https://docs.snyk.io/features/snyk-cli/install-the-snyk-cli_
+
+```bash
+$ snyk --version
+1.675.0
+```
 
 * Authorize the Snyk CLI with your account as follows
 
@@ -571,27 +578,32 @@ $ snyk iac test ./terraform/big_data.tf --json
 }
 ```
 
-* With Snyk Infrastructure as Code, you can scan both your static configuration files and Terraform Plan output using the CLI
-
-[Test your Terraform files with our CLI tool](https://support.snyk.io/hc/en-us/articles/360013723877-Test-your-Terraform-files-with-our-CLI-tool)
+* With Snyk Infrastructure as Code, you can scan both your static configuration files and Terraform Plan output using the CLI, [Test your Terraform files with our CLI tool](https://support.snyk.io/hc/en-us/articles/360013723877-Test-your-Terraform-files-with-our-CLI-tool).
 
 Terraform Plan is the step run between writing your configuration files and deploying those changes.
 
-$ terraform plan identifies the changes that need to be made to your target environment in order to match your desired state.
+Note: terraform plan identifies the changes that need to be made to your target environment in order to match your desired state.
 
-As part of this planning stage, all variables and Terraform Modules that are used in your targeted terraform deployment are taken into consideration.
-
-If you have written a custom terraform module and are referencing it in your deployment, then it will be included in the terraform plan output and scanned accordingly.
+If you have written a custom terraform module and are referencing it in your deployment, then it will be included in the terraform plan output and scanned   accordingly.
 
 This means the Terraform plan output provides a complete artefact to be scanned from a security perspective. 
+
+_Note: For this workshop we won't be doing a terraform plan scan but it's important to know we can do that_
 
 ![alt tag](https://i.ibb.co/gDLFYcH/snyk-iac-6.png)
 
 ## Step 5 Test using the Snyk CLI - AWS CloudFormation files
 
+_Note: Please ensure you have the latest version of the Snyk CLI installed a version equal to or greater than the version below. https://docs.snyk.io/features/snyk-cli/install-the-snyk-cli_
+
+```bash
+$ snyk --version
+1.675.0
+```
+
 Snyk tests and monitors CloudFormation files from source code repositories. It gives advice on how to better secure cloud environments by catching misconfigurations before they are pushed to production along with assistance on how best to fix them
 
-Inside the "**CloudFormation**" Folder run a scan as follows. This will pick up all the IaC config files which exist in this directory in our case we have two files
+* Run the following IaC scan of any files inside the folder "**CloudFormation**". This will pick up all the IaC config files which exist in this directory in our case we have two files
 
 ```bash
 $ snyk iac test ./CloudFormation/
@@ -833,7 +845,7 @@ $ snyk iac test ./Kubernetes/employee-K8s.yaml --json
 
 ## Step 7 View Snyk IaC Rules
 
-Snyk IaC has a comprehensive set of security rules across AWS, Azure, GCP & Kubernetes with support for Terraform, Kubernetes, and Helm configuration formats. The details of these issues, their impact, and how to fix them are all built-in to Snyk IaC, so developers get feedback directly in their own tools. For reference, we have also documented the security rules that we support for each provider below, along with relevant benchmarks and authoritative third-party references
+Snyk IaC has a comprehensive set of security rules across AWS, Azure, GCP & Kubernetes with support for Terraform, CloudFormation, Kubernetes, and Helm configuration formats. The details of these issues, their impact, and how to fix them are all built-in to Snyk IaC, so developers get feedback directly in their own tools. For reference, we have also documented the security rules that we support for each provider below, along with relevant benchmarks and authoritative third-party references
 
 Navigate to [Snyk Infrastructure as Code](https://snyk.io/security-rules)
 
